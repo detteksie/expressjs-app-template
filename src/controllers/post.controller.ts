@@ -6,7 +6,7 @@ import {
   UpdatePostRequest,
 } from '~/dto/post.request';
 import { PostService, postService } from '~/services/post.service';
-import { successJson } from '~/utils/response';
+import { successJson } from '~/utils/response.helper';
 
 type PostControllerId = {
   postId: string;

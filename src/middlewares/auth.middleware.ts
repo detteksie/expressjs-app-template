@@ -1,7 +1,7 @@
 import expressAsyncHandler from 'express-async-handler';
 import createHttpError from 'http-errors';
 import { JwtPayload } from 'jsonwebtoken';
-import { db } from '~/models';
+import { sql } from '~/infrastructures/sql';
 import { verifyToken } from '~/utils/jwt.helper';
 
 export const authMiddlware = expressAsyncHandler(async (req, res, next) => {
@@ -10,7 +10,7 @@ export const authMiddlware = expressAsyncHandler(async (req, res, next) => {
 
   const payload = verifyToken(token) as JwtPayload;
 
-  const user = await db.User.findByPk(payload.sub);
+  const user = await sql.User.findByPk(payload.sub);
   req.user = user;
 
   next();

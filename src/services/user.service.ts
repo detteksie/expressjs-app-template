@@ -1,16 +1,16 @@
 import createHttpError from 'http-errors';
-import { db } from '~/models';
 import { UpdateUserRequest } from '~/dto/user.request';
+import { Sql, sql } from '~/infrastructures/sql';
 
 export class UserService {
-  constructor(private database: typeof db) {}
+  constructor(private sql: Sql) {}
 
   async getUserList() {
-    return this.database.User.findAll();
+    return this.sql.User.findAll();
   }
 
   async getUser(userId: number) {
-    const user = await this.database.User.findByPk(userId);
+    const user = await this.sql.User.findByPk(userId);
     if (!user) {
       throw createHttpError(404, 'User not found');
     }
@@ -18,10 +18,10 @@ export class UserService {
   }
 
   async getMyPost(userId: number) {
-    const user = await this.database.User.findByPk(userId, {
+    const user = await this.sql.User.findByPk(userId, {
       include: [
         {
-          model: this.database.Post,
+          model: this.sql.Post,
         },
       ],
     });
@@ -32,10 +32,10 @@ export class UserService {
   }
 
   async getMyComments(userId: number) {
-    const user = await this.database.User.findByPk(userId, {
+    const user = await this.sql.User.findByPk(userId, {
       include: [
         {
-          model: this.database.Comment,
+          model: this.sql.Comment,
         },
       ],
     });
@@ -47,7 +47,7 @@ export class UserService {
 
   async updateUser(myUserId: number, updateUserRequest: UpdateUserRequest) {
     const { name, birthdate } = updateUserRequest;
-    const updatedProfile = await this.database.User.update(
+    const updatedProfile = await this.sql.User.update(
       { name, birthdate },
       {
         where: { id: myUserId },
@@ -58,4 +58,4 @@ export class UserService {
   }
 }
 
-export const userService = new UserService(db);
+export const userService = new UserService(sql);

@@ -1,25 +1,25 @@
 import createHttpError from 'http-errors';
-import { db } from '~/models';
+import { LoginUserRequest, RegisterUserRequest } from '~/dto/auth.request';
+import { Sql, sql } from '~/infrastructures/sql';
 import { comparePassword } from '~/utils/bcrypt.helper';
 import { createToken } from '~/utils/jwt.helper';
-import { LoginUserRequest, RegisterUserRequest } from '~/dto/auth.request';
 
 export class AuthService {
-  constructor(private readonly database: typeof db) {}
+  constructor(private readonly sql: Sql) {}
 
   private loginError() {
     throw createHttpError(400, 'Email or Password is invalid');
   }
 
   async findEmail(email: string) {
-    const user = await this.database.User.findOne({ where: { email } });
+    const user = await this.sql.User.findOne({ where: { email } });
     if (user) throw createHttpError(409, 'Email already exist');
   }
 
   async register(registerUserRequest: RegisterUserRequest) {
     const { name, email, password, birthdate } = registerUserRequest;
     await this.findEmail(email);
-    const user = await this.database.User.create({
+    const user = await this.sql.User.create({
       name,
       email,
       password,
@@ -30,7 +30,7 @@ export class AuthService {
 
   async login(loginRequest: LoginUserRequest) {
     const { email, password } = loginRequest;
-    const user = await this.database.User.findOne({
+    const user = await this.sql.User.findOne({
       where: { email },
       attributes: { include: ['password'] },
     });
@@ -44,4 +44,4 @@ export class AuthService {
   }
 }
 
-export const authService = new AuthService(db);
+export const authService = new AuthService(sql);

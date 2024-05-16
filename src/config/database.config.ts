@@ -1,13 +1,13 @@
-import { Options } from 'sequelize';
+import Sequelize from 'sequelize';
 
-interface SequelizeOptions extends Options {
+interface Options extends Sequelize.Options {
   url?: string;
 }
 
 interface DatabaseConfig {
-  development: SequelizeOptions;
-  test: SequelizeOptions;
-  production: SequelizeOptions;
+  development: Options;
+  test: Options;
+  production: Options;
 }
 
 const databaseConfig: DatabaseConfig = {

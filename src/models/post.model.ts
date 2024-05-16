@@ -21,7 +21,7 @@ import {
   NonAttribute,
   Sequelize,
 } from 'sequelize';
-import { Models } from '.';
+import { Models } from '~/infrastructures/sql';
 import { Comment } from './comment.model';
 import { User } from './user.model';
 

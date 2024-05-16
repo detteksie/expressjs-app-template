@@ -18,7 +18,7 @@ import {
   NonAttribute,
   Sequelize,
 } from 'sequelize';
-import { Models } from '.';
+import { Models } from '~/infrastructures/sql';
 import { hashPassword } from '~/utils/bcrypt.helper';
 import { Comment } from './comment.model';
 import { Post } from './post.model';

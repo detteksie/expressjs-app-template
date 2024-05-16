@@ -6,6 +6,7 @@
 import { createServer } from 'http';
 import app from '~/app';
 import { debug } from './debug';
+import { sql } from '~/infrastructures/sql';
 
 /**
  * Get port from environment and store in Express.
@@ -26,8 +27,9 @@ server.on('error', onError);
 server.on('listening', onListening);
 server.on('SIGTERM', () => {
   debug('SIGTERM signal received: closing HTTP server');
-  server.close(() => {
+  server.close(async () => {
     debug('HTTP server closed');
+    await sql.sequelize.close();
   });
 });
 
@@ -53,7 +55,7 @@ function normalizePort(val: string) {
 /**
  * Event listener for HTTP server "error" event.
  */
-function onError(error: any) {
+async function onError(error: any) {
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -78,8 +80,10 @@ function onError(error: any) {
 /**
  * Event listener for HTTP server "listening" event.
  */
-function onListening() {
+async function onListening() {
   const addr = server.address();
   const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr?.port;
   debug('Listening on ' + bind);
+
+  await Promise.all([sql.authenticate()]);
 }

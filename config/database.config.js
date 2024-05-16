@@ -1,3 +1,17 @@
+/**
+ * @typedef {({url?: string} & import("sequelize").Options)} Options
+ */
+/**
+ * @typedef DatabaseConfig
+ * @type {Object}
+ * @property {Options} development
+ * @property {Options} test
+ * @property {Options} production
+ */
+
+/**
+ * @type {DatabaseConfig}
+ */
 const databaseConfig = {
   development: {
     url: process.env.DATABASE_URL,

@@ -1,8 +1,8 @@
-import { db } from '~/models';
 import { HideCommentRequest, UpdateCommentRequest } from '~/dto/comment.request';
+import { Sql, sql } from '~/infrastructures/sql';
 
 export class CommentService {
-  constructor(private readonly database: typeof db) {}
+  constructor(private readonly sql: Sql) {}
 
   async updateComment(
     commentatorId: number,
@@ -10,7 +10,7 @@ export class CommentService {
     updateCommentRequest: UpdateCommentRequest,
   ) {
     const { content } = updateCommentRequest;
-    const updatedComment = await this.database.Comment.update(
+    const updatedComment = await this.sql.Comment.update(
       { content },
       { where: { id: commentId, commentatorId } },
     );
@@ -23,7 +23,7 @@ export class CommentService {
     updateCommentRequest: HideCommentRequest,
   ) {
     const { hidden } = updateCommentRequest;
-    const updatedComment = await this.database.Comment.update(
+    const updatedComment = await this.sql.Comment.update(
       { hidden },
       { where: { id: commentId, commentatorId } },
     );
@@ -31,11 +31,11 @@ export class CommentService {
   }
 
   async deleteComment(commentatorId: number, commentId: number) {
-    const deletedComment = await this.database.Comment.destroy({
+    const deletedComment = await this.sql.Comment.destroy({
       where: { id: commentId, commentatorId },
     });
     return deletedComment;
   }
 }
 
-export const commentService = new CommentService(db);
+export const commentService = new CommentService(sql);
