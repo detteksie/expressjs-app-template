@@ -2,7 +2,7 @@ import expressAsyncHandler from 'express-async-handler';
 import createHttpError from 'http-errors';
 import { JwtPayload } from 'jsonwebtoken';
 import { sql } from '~/infrastructures/sql';
-import { verifyToken } from '~/utils/jwt.helper';
+import { verifyToken } from '~/utils/jwt.util';
 
 export const authMiddlware = expressAsyncHandler(async (req, res, next) => {
   const token = req.headers['authorization']?.replace('Bearer ', '');

@@ -19,7 +19,7 @@ import {
   Sequelize,
 } from 'sequelize';
 import { Models } from '~/infrastructures/sql';
-import { hashPassword } from '~/utils/bcrypt.helper';
+import { hashPassword } from '~/utils/bcrypt.util';
 import { Comment } from './comment.model';
 import { Post } from './post.model';
 
@@ -32,6 +32,7 @@ export class User extends Model<
   declare name: string;
   declare email: string;
   declare password: string;
+  declare sexType: 'Unknown' | 'Male' | 'Female' | null;
   declare birthdate: Date | null;
 
   // timestamps!
@@ -39,6 +40,8 @@ export class User extends Model<
   declare createdAt?: CreationOptional<Date>;
   // updatedAt can be undefined during creation
   declare updatedAt?: CreationOptional<Date>;
+
+  declare deletedAt?: Date | null;
 
   // Since TS cannot determine model association at compile time
   // we have to declare them here purely virtually
@@ -121,6 +124,10 @@ export const userModel = (sequelize: Sequelize, DT: typeof DataTypes) => {
           },
         },
       },
+      sexType: {
+        type: DT.ENUM('Unknown', 'Male', 'Female'),
+        defaultValue: 'Unknown',
+      },
       birthdate: {
         type: DT.DATE,
         validate: {
@@ -135,6 +142,7 @@ export const userModel = (sequelize: Sequelize, DT: typeof DataTypes) => {
       sequelize,
       modelName: 'user',
       underscored: true,
+      paranoid: true,
       defaultScope: { attributes: { exclude: ['password'] } },
       hooks: {
         beforeCreate: async (doc) => {

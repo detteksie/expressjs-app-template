@@ -24,6 +24,7 @@ export class Comment extends Model<InferAttributes<Comment>, InferCreationAttrib
 
   declare createdAt?: CreationOptional<Date>;
   declare updatedAt?: CreationOptional<Date>;
+  declare deletedAt?: Date | null;
 
   declare getCommentator: BelongsToGetAssociationMixin<User>;
   declare createCommentator: BelongsToCreateAssociationMixin<User>;
@@ -85,6 +86,7 @@ export const commentModel = (sequelize: Sequelize, DT: typeof DataTypes) => {
       sequelize,
       modelName: 'comment',
       underscored: true,
+      paranoid: true,
     },
   );
 

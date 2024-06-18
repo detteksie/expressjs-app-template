@@ -14,7 +14,7 @@ const databaseConfig: DatabaseConfig = {
   development: {
     url: process.env.DATABASE_URL,
     dialect: 'postgres',
-    logging: console.log,
+    logging: true,
   },
   test: {
     url: process.env.DATABASE_URL,

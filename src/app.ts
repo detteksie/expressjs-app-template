@@ -7,7 +7,7 @@ import createHttpError from 'http-errors';
 import morgan from 'morgan';
 import path from 'path';
 import { router } from './router';
-import { errorJson } from './utils/response.helper';
+import { errorJson } from './utils/response.util';
 
 const app = e();
 
