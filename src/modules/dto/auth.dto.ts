@@ -1,11 +1,12 @@
-export interface RegisterDto {
-  name: string;
-  email: string;
-  password: string;
-  birthdate: Date;
+export class RegisterDto {
+  declare email: string;
+  declare username: string;
+  declare password: string;
+  declare name: string;
+  declare birthdate?: Date | null;
 }
 
-export interface LoginDto {
-  email: string;
-  password: string;
+export class LoginDto {
+  declare userSession: string;
+  declare password: string;
 }

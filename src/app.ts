@@ -1,3 +1,5 @@
+import path from 'path';
+
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
@@ -5,7 +7,7 @@ import e, { ErrorRequestHandler } from 'express';
 import helmet from 'helmet';
 import createHttpError from 'http-errors';
 import morgan from 'morgan';
-import path from 'path';
+
 import { router } from './router';
 import { errorJson } from './utils/response.util';
 

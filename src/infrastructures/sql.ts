@@ -1,9 +1,10 @@
 import Sequelize from 'sequelize';
-import { debug } from '~/bin/debug';
-import databaseConfig from '~/config/database.config';
-import { Comment, commentModel } from '~/models/comment.model';
-import { Post, postModel } from '~/models/post.model';
-import { User, userModel } from '~/models/user.model';
+
+import { debug } from '|/bin/debug';
+import { Comment, commentModel } from '|/models/comment.model';
+import { Post, postModel } from '|/models/post.model';
+import { User, userModel } from '|/models/user.model';
+import databaseConfig from '|db/database.config';
 
 const env = process.env.NODE_ENV! || 'development';
 const config = databaseConfig[env as keyof typeof databaseConfig];

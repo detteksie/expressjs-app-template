@@ -1,8 +1,9 @@
 import { RequestHandler, Router } from 'express';
+
 import { authRoutes } from './modules/routes/auth.routes';
-import { userRoutes } from './modules/routes/user.routes';
-import { postRoutes } from './modules/routes/post.routes';
 import { commentRoutes } from './modules/routes/comment.routes';
+import { postRoutes } from './modules/routes/post.routes';
+import { userRoutes } from './modules/routes/user.routes';
 
 export const router = Router();
 

@@ -1,17 +1,17 @@
-export interface CreatePostDto {
-  title: string;
-  content: string;
+export class CreatePostDto {
+  declare title: string;
+  declare content: string;
 }
 
-export interface UpdatePostDto {
-  title?: string;
-  content?: string;
+export class UpdatePostDto {
+  declare title?: string;
+  declare content?: string;
 }
 
-export interface PublishPostDto {
-  isPublished?: boolean;
+export class PublishPostDto {
+  declare isPublished?: boolean;
 }
 
-export interface AddPostCommentDto {
-  content: string;
+export class AddPostCommentDto {
+  declare content: string;
 }

@@ -1,13 +1,9 @@
 import createHttpError from 'http-errors';
-import {
-  AddPostCommentDto,
-  CreatePostDto,
-  PublishPostDto,
-  UpdatePostDto,
-} from '~/modules/dto/post.dto';
-import { Sql, sql } from '~/infrastructures/sql';
-import { paginate } from '~/utils/sequelize-paginate/paginate';
-import { IPaginationOptions } from '~/utils/sequelize-paginate/interfaces';
+
+import { Sql, sql } from '|/infrastructures/sql';
+import { IPaginationOptions, paginate } from '|/utils/sequelize-paginate';
+
+import { AddPostCommentDto, CreatePostDto, PublishPostDto, UpdatePostDto } from '../dto/post.dto';
 
 export class PostService {
   constructor(private readonly sql: Sql) {}
@@ -19,7 +15,10 @@ export class PostService {
   }
 
   async getPostList(options: IPaginationOptions) {
-    const posts = await paginate(this.sql.Post, options, { where: { isPublished: true } });
+    const posts = await paginate(this.sql.Post, options, {
+      where: { isPublished: true },
+      order: [['id', 'DESC']],
+    });
     return posts;
   }
 
@@ -32,7 +31,9 @@ export class PostService {
         },
       ],
     });
-    if (!post?.isPublished) throw createHttpError(404, 'Post not found');
+    if (!post?.isPublished) {
+      throw createHttpError(404, 'Post not found');
+    }
     return post;
   }
 

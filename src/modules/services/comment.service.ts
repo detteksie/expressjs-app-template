@@ -1,5 +1,6 @@
-import { HideCommentDto, UpdateCommentDto } from '~/modules/dto/comment.dto';
-import { Sql, sql } from '~/infrastructures/sql';
+import { Sql, sql } from '|/infrastructures/sql';
+
+import { HideCommentDto, UpdateCommentDto } from '../dto/comment.dto';
 
 export class CommentService {
   constructor(private readonly sql: Sql) {}

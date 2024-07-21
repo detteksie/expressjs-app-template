@@ -1,7 +1,9 @@
 import expressAsyncHandler from 'express-async-handler';
-import { LoginDto, RegisterDto } from '~/modules/dto/auth.dto';
-import { AuthService, authService } from '~/modules/services/auth.service';
-import { successJson } from '~/utils/response.util';
+
+import { successJson } from '|/utils/response.util';
+
+import { LoginDto, RegisterDto } from '../dto/auth.dto';
+import { AuthService, authService } from '../services/auth.service';
 
 export class AuthController {
   constructor(private readonly authService: AuthService) {}

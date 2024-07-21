@@ -1,21 +1,22 @@
 import { Request } from 'express';
 
 interface SuccessJson<T = any> {
-  message: string;
+  status: string;
   result: T;
 }
 
 export function successJson<T>(data: T): SuccessJson<T> {
   return {
-    message: 'success',
+    status: 'success',
     result: data,
   };
 }
 
 export function errorJson<T extends Error>(req: Request, err: T) {
   return {
-    message: 'error',
+    status: 'error',
     name: err.name,
-    ...(req.app.get('env') === 'development' ? { stack: err.stack, err } : {}),
+    message: err.message,
+    ...(req.app.get('env') === 'development' ? { stack: err.stack } : {}),
   };
 }

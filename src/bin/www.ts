@@ -4,9 +4,11 @@
  * Module dependencies.
  */
 import { createServer } from 'http';
-import app from '~/app';
+
+import app from '|/app';
+import { sql } from '|/infrastructures/sql';
+
 import { debug } from './debug';
-import { sql } from '~/infrastructures/sql';
 
 /**
  * Get port from environment and store in Express.

@@ -1,11 +1,12 @@
 import { Attributes, FindAndCountOptions, Model, ModelStatic } from 'sequelize';
+
+import { createPaginationObject } from './create-pagination';
 import {
   IPaginationMeta,
   IPaginationOptions,
   ObjectLiteral,
   // PaginationTypeEnum,
 } from './interfaces';
-import { createPaginationObject } from './create-pagination';
 
 const DEFAULT_LIMIT = 10;
 const DEFAULT_PAGE = 1;

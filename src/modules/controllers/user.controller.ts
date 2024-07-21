@@ -1,8 +1,10 @@
 import expressAsyncHandler from 'express-async-handler';
-import { UpdateUserDto } from '~/modules/dto/user.dto';
-import { UserService, userService } from '~/modules/services/user.service';
-import { PaginationQuery } from '~/utils/pagination-query.util';
-import { successJson } from '~/utils/response.util';
+
+import { PaginationQuery } from '|/utils/pagination-query.util';
+import { successJson } from '|/utils/response.util';
+
+import { UpdateUserDto } from '../dto/user.dto';
+import { UserService, userService } from '../services/user.service';
 
 type UserControllerId = { userId: string };
 

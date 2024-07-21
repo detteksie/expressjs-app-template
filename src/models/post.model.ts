@@ -21,7 +21,9 @@ import {
   NonAttribute,
   Sequelize,
 } from 'sequelize';
-import { Models } from '~/infrastructures/sql';
+
+import { Models } from '|/infrastructures/sql';
+
 import { Comment } from './comment.model';
 import { User } from './user.model';
 
@@ -91,6 +93,8 @@ export const postModel = (sequelize: Sequelize, DT: typeof DataTypes) => {
           model: 'users',
           key: 'id',
         },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         validate: {
           isInt: true,
         },

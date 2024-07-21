@@ -1,17 +1,26 @@
 import expressAsyncHandler from 'express-async-handler';
 import createHttpError from 'http-errors';
 import { JwtPayload } from 'jsonwebtoken';
-import { sql } from '~/infrastructures/sql';
-import { verifyToken } from '~/utils/jwt.util';
 
-export const authMiddlware = expressAsyncHandler(async (req, res, next) => {
-  const token = req.headers['authorization']?.replace('Bearer ', '');
-  if (!token) throw createHttpError(401);
+import { sql } from '|/infrastructures/sql';
+import { verifyToken } from '|/utils/jwt.util';
 
-  const payload = verifyToken(token) as JwtPayload;
+export const authMiddleware = (isSearch: boolean = false) =>
+  expressAsyncHandler(async (req, res, next) => {
+    const token = req.header('authorization')?.replace('Bearer ', '');
+    if (!token) {
+      throw createHttpError(401);
+    }
 
-  const user = await sql.User.findByPk(payload.sub);
-  req.user = user;
+    const payload = verifyToken(token) as JwtPayload;
 
-  next();
-});
+    let user = null;
+    if (isSearch) {
+      user = await sql.User.findByPk(payload.sub);
+    } else {
+      user = { id: payload.sub };
+    }
+    req.user = user as any;
+
+    next();
+  });

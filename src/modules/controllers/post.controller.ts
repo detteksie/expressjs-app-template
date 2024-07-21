@@ -1,13 +1,10 @@
 import expressAsyncHandler from 'express-async-handler';
-import {
-  AddPostCommentDto,
-  CreatePostDto,
-  PublishPostDto,
-  UpdatePostDto,
-} from '~/modules/dto/post.dto';
-import { PostService, postService } from '~/modules/services/post.service';
-import { PaginationQuery } from '~/utils/pagination-query.util';
-import { successJson } from '~/utils/response.util';
+
+import { PaginationQuery } from '|/utils/pagination-query.util';
+import { successJson } from '|/utils/response.util';
+
+import { AddPostCommentDto, CreatePostDto, PublishPostDto, UpdatePostDto } from '../dto/post.dto';
+import { PostService, postService } from '../services/post.service';
 
 type PostControllerId = {
   postId: string;

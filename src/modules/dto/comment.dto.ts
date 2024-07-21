@@ -1,7 +1,7 @@
-export interface UpdateCommentDto {
-  content?: string;
+export class UpdateCommentDto {
+  declare content?: string;
 }
 
-export interface HideCommentDto {
-  hidden?: boolean;
+export class HideCommentDto {
+  declare hidden?: boolean;
 }

@@ -1,5 +1,6 @@
 import { body } from 'express-validator';
-import { validationMiddleware } from '~/middlewares/validation.middleware';
+
+import { validationMiddleware } from '|/middlewares/validation.middleware';
 
 export class AuthValidation {
   register = [
@@ -7,13 +8,13 @@ export class AuthValidation {
     body('email').isEmail().normalizeEmail(),
     body('password').isString().isLength({ min: 8, max: 32 }),
     body('birthdate').isDate().optional(),
-    validationMiddleware,
+    validationMiddleware(),
   ];
 
   login = [
     body('email').isEmail().normalizeEmail(),
     body('password').isString().isLength({ min: 8, max: 32 }),
-    validationMiddleware,
+    validationMiddleware(),
   ];
 }
 

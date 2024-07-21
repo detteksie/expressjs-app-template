@@ -1,16 +1,18 @@
 import { Router } from 'express';
-import { postController } from '~/modules/controllers/post.controller';
-import { authMiddlware } from '~/middlewares/auth.middleware';
-import { postValidation } from '~/modules/validations/post.validation';
-import { paginationMiddleware } from '~/middlewares/pagination.middleware';
+
+import { authMiddleware } from '|/middlewares/auth.middleware';
+import { paginationMiddleware } from '|/middlewares/pagination.middleware';
+
+import { postController } from '../controllers/post.controller';
+import { postValidation } from '../validations/post.validation';
 
 export const postRoutes = Router();
 
 postRoutes
-  .get('/', paginationMiddleware, postController.getPostList)
+  .get('/', paginationMiddleware(), postController.getPostList)
   .get('/:postId', postValidation.getPost, postController.getPost);
 postRoutes
-  .use(authMiddlware)
+  .use(authMiddleware())
   .post('/', postValidation.createPost, postController.createPost)
   .post('/:postId/comments', postValidation.addPostComment, postController.addPostComment)
   .get('/:postId/comments', postValidation.getPostComments, postController.getPostComments)

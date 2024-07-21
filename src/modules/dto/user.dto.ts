@@ -1,11 +1,11 @@
-export interface CreateUserDto {
-  name: string;
-  email: string;
-  password: string;
-  birthdate?: Date;
+export class CreateUserDto {
+  declare name: string;
+  declare email: string;
+  declare password: string;
+  declare birthdate?: Date | null;
 }
 
-export interface UpdateUserDto {
-  name: string;
-  birthdate?: Date;
+export class UpdateUserDto {
+  declare name: string;
+  declare birthdate?: Date | null;
 }

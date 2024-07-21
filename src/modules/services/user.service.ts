@@ -1,8 +1,9 @@
 import createHttpError from 'http-errors';
-import { UpdateUserDto } from '~/modules/dto/user.dto';
-import { Sql, sql } from '~/infrastructures/sql';
-import { paginate } from '~/utils/sequelize-paginate/paginate';
-import { IPaginationOptions } from '~/utils/sequelize-paginate/interfaces';
+
+import { Sql, sql } from '|/infrastructures/sql';
+import { IPaginationOptions, paginate } from '|/utils/sequelize-paginate';
+
+import { UpdateUserDto } from '../dto/user.dto';
 
 export class UserService {
   constructor(private sql: Sql) {}
