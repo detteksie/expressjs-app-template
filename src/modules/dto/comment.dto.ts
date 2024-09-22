@@ -1,7 +1,7 @@
-export class UpdateCommentDto {
-  declare content?: string;
-}
+export type UpdateCommentDto = {
+  content?: string;
+};
 
-export class HideCommentDto {
-  declare hidden?: boolean;
-}
+export type HideCommentDto = {
+  hidden?: boolean;
+};

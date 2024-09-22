@@ -1,83 +1,67 @@
 # Express App - Template
 
-Template for Express Application with TypeScript
+[Template for Express Application with TypeScript](https://github.com/ssamsara98/express-app-template.git)
 
-- prerequisite
+#### prerequisite
 
-```bash
+```sh
 cp template.env .env
 ```
 
+## Installation
+
+```sh
+pnpm install
+```
+
 ## Migrations
+
+run `npx sequelize --help` for more help!
 
 ### DB Migrate
 
 - db create
 
-```bash
-yarn seq db:create
-```
-
-```bash
+```sh
 pnpm seq db:create
 ```
 
 - db drop
 
-```bash
-yarn seq db:drop
-```
-
-```bash
+```sh
 pnpm seq db:drop
 ```
 
 - migrate all
 
-```bash
-yarn seq db:migrate
-```
-
-```bash
+```sh
 pnpm seq db:migrate
 ```
 
 - migrate status
 
-```bash
-yarn seq db:migrate:status
-```
-
-```bash
+```sh
 pnpm seq db:migrate:status
 ```
 
 - revert one
 
-```bash
-yarn seq db:undo
-```
-
-```bash
+```sh
 pnpm seq db:undo
 ```
 
 - revert all
 
-```bash
-yarn seq db:undo:all
-```
-
-```bash
+```sh
 pnpm seq db:undo:all
 ```
 
 ### Model Generate - example
 
-```bash
-yarn seq model:generate --underscored --name product --attributes name:string,price:integer
+`pnpm seq model:generate --underscored --name <model_name> --attributes <attribute_name_1>:<data_type_1>,<attribute_name_n>:<data_type_n>`
+
+```sh
+pnpm seq model:generate --underscored --name product --attributes name:string,price:integer,is_published:boolean
 ```
 
-```bash
-pnpm seq model:generate --underscored --name product --attributes name:string,price:integer
-```
+// to set id, use this example -> `select setval('users_id_seq', 1000);`

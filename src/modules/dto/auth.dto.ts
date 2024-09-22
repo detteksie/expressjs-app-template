@@ -1,12 +1,12 @@
-export class RegisterDto {
-  declare email: string;
-  declare username: string;
-  declare password: string;
-  declare name: string;
-  declare birthdate?: Date | null;
-}
+export type RegisterDto = {
+  email: string;
+  username: string;
+  password: string;
+  name: string;
+  birthdate?: Date | null;
+};
 
-export class LoginDto {
-  declare userSession: string;
-  declare password: string;
-}
+export type LoginDto = {
+  userSession: string;
+  password: string;
+};

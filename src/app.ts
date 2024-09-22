@@ -20,7 +20,8 @@ app.set('view engine', 'pug');
 app.use(compression());
 app.use(helmet());
 app.use(cors());
-app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
+if (process.env.NODE_ENV !== 'test')
+  app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 app.use(e.json());
 app.use(e.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -29,7 +30,7 @@ app.use(e.static(path.join(__dirname, '..', 'public')));
 app.use('/', router);
 
 // catch 404 and forward to error handler
-app.use(async (_, __, next) => {
+app.use(async (_req, _res, next) => {
   next(createHttpError(404));
 });
 
@@ -51,7 +52,7 @@ app.use((async (err, req, res, next) => {
   // render the error page
   res.status(err.status || 500);
   next();
-}) as ErrorRequestHandler);
+}) satisfies ErrorRequestHandler);
 app.use((_, res) => {
   res.json(res.locals.err);
 });

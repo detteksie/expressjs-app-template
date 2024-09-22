@@ -57,15 +57,7 @@ const eslintrc = {
       },
     ],
 
-    '@typescript-eslint/ban-ts-comment': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/interface-name-prefix': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
-    '@typescript-eslint/no-non-null-asserted-optional-chain': 'off',
-    '@typescript-eslint/no-var-requires': 'off',
-    'no-extra-boolean-cast': 'off',
   },
   settings: {
     'import/resolver': {

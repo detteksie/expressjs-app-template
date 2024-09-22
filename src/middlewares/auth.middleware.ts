@@ -3,6 +3,7 @@ import createHttpError from 'http-errors';
 import { JwtPayload } from 'jsonwebtoken';
 
 import { sql } from '|/infrastructures/sql';
+import { User } from '|/models/user.model';
 import { verifyToken } from '|/utils/jwt.util';
 
 export const authMiddleware = (isSearch: boolean = false) =>
@@ -14,13 +15,14 @@ export const authMiddleware = (isSearch: boolean = false) =>
 
     const payload = verifyToken(token) as JwtPayload;
 
-    let user = null;
+    let user: null | { id: string | undefined } | User = null;
     if (isSearch) {
       user = await sql.User.findByPk(payload.sub);
     } else {
       user = { id: payload.sub };
     }
-    req.user = user as any;
+    // @ts-expect-error nothing
+    req.user = user;
 
     next();
   });

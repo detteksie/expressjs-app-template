@@ -57,7 +57,7 @@ function normalizePort(val: string) {
 /**
  * Event listener for HTTP server "error" event.
  */
-async function onError(error: any) {
+async function onError(error: { syscall: string; code: string }) {
   if (error.syscall !== 'listen') {
     throw error;
   }

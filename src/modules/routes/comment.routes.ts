@@ -9,6 +9,6 @@ export const commentRoutes = Router();
 
 commentRoutes
   .use(authMiddleware())
-  .patch('/:commentId', commentValidation.updateComment, commentController.updateComment)
-  .patch('/:commentId/hide', commentValidation.hideComment, commentController.hideComment)
-  .delete('/:commentId', commentValidation.deleteComment, commentController.deleteComment);
+  .patch('/c/:commentId', commentValidation.updateComment, commentController.updateComment)
+  .patch('/c/:commentId/hide', commentValidation.hideComment, commentController.hideComment)
+  .delete('/c/:commentId', commentValidation.deleteComment, commentController.deleteComment);

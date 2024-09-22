@@ -11,30 +11,28 @@ type UserControllerId = { userId: string };
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  getUserList = expressAsyncHandler<any, any, any, PaginationQuery>(async (req, res) => {
-    console.log(req.url, 'req.url');
-    console.log(req.baseUrl, 'req.baseUrl');
-    console.log(req.originalUrl, 'req.originalUrl');
-    const result = await this.userService.getUserList({
-      limit: req.query.limit!,
-      page: req.query.page!,
-      route: req.originalUrl,
-    });
-    res.json(successJson(result));
-  });
+  getUserList = expressAsyncHandler<unknown, unknown, unknown, PaginationQuery>(
+    async (req, res) => {
+      const result = await this.userService.getUserList({
+        limit: req.query.limit!,
+        page: req.query.page!,
+        route: req.originalUrl,
+      });
+      res.json(successJson(result));
+    },
+  );
 
   getMe = expressAsyncHandler(async (req, res) => {
-    const result = await this.userService.getUser(req.user?.id!);
-    res.json(successJson(result));
+    res.json(successJson(req.user));
   });
 
   getMyPosts = expressAsyncHandler(async (req, res) => {
-    const result = await this.userService.getMyPost(req.user?.id!);
+    const result = await this.userService.getMyPost(req.user.id!);
     res.json(successJson(result));
   });
 
   getMyComments = expressAsyncHandler(async (req, res) => {
-    const result = await this.userService.getMyComments(req.user?.id!);
+    const result = await this.userService.getMyComments(req.user.id!);
     res.json(successJson(result));
   });
 
@@ -43,8 +41,8 @@ export class UserController {
     res.json(successJson(result));
   });
 
-  updateMe = expressAsyncHandler<any, any, UpdateUserDto>(async (req, res) => {
-    await this.userService.updateUser(req.user?.id!, req.body);
+  updateMe = expressAsyncHandler<unknown, unknown, UpdateUserDto>(async (req, res) => {
+    await this.userService.updateUser(req.user.id!, req.body);
     res.status(204).json();
   });
 }

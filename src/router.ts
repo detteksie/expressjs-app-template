@@ -8,9 +8,9 @@ import { userRoutes } from './modules/routes/user.routes';
 export const router = Router();
 
 /* GET home page. */
-router.get('/', (async (_, res, __) => {
+router.get('/', (async (req, res) => {
   res.render('index', { title: 'Express' });
-}) as RequestHandler);
+}) satisfies RequestHandler);
 
 router.use('/', authRoutes);
 

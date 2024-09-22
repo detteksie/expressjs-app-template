@@ -10,7 +10,7 @@ const env = process.env.NODE_ENV! || 'development';
 const config = databaseConfig[env as keyof typeof databaseConfig];
 
 export const sequelize: Sequelize.Sequelize = config.url
-  ? new Sequelize.Sequelize(config.url as string, config)
+  ? new Sequelize.Sequelize(config.url satisfies string, config)
   : new Sequelize.Sequelize(config.database!, config.username!, config.password, config);
 
 export class Models {
@@ -44,14 +44,14 @@ export class Sql extends Models {
 
   private createAssociation(models: Models) {
     (Object.keys(models) as Array<keyof Models>).forEach((modelName) => {
-      if (!!models[modelName].associate) {
+      if (models[modelName].associate !== undefined) {
         models[modelName].associate(models);
       }
     });
   }
 
   async authenticate() {
-    const [_, err] = await sequelize
+    const [, err] = await sequelize
       .authenticate()
       .then(() => {
         debug('SQL Connection has been established successfully.');

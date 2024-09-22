@@ -1,17 +1,17 @@
-export class CreatePostDto {
-  declare title: string;
-  declare content: string;
-}
+export type CreatePostDto = {
+  title: string;
+  content: string;
+};
 
-export class UpdatePostDto {
-  declare title?: string;
-  declare content?: string;
-}
+export type UpdatePostDto = {
+  title?: string;
+  content?: string;
+};
 
-export class PublishPostDto {
-  declare isPublished?: boolean;
-}
+export type PublishPostDto = {
+  isPublished?: boolean;
+};
 
-export class AddPostCommentDto {
-  declare content: string;
-}
+export type AddPostCommentDto = {
+  content: string;
+};

@@ -1,4 +1,15 @@
 {
   "extends": "./tsconfig.json",
-  "exclude": ["node_modules", "test", "dist", "**/*spec.ts", "db"]
+  "compilerOptions": {
+    "rootDir": "./src"
+  },
+  "exclude": [
+    "node_modules",
+    "tests",
+    "**/*(spec|test).ts",
+    "dist",
+    "db",
+    "jest.config.ts",
+    "jest-e2e.config.ts"
+  ]
 }

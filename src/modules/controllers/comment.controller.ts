@@ -10,10 +10,10 @@ type CommentControllerId = {
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
 
-  updateComment = expressAsyncHandler<CommentControllerId, any, UpdateCommentDto>(
+  updateComment = expressAsyncHandler<CommentControllerId, unknown, UpdateCommentDto>(
     async (req, res) => {
       await this.commentService.updateComment(
-        req.user?.id!,
+        req.user.id!,
         parseInt(req.params.commentId),
         req.body,
       );
@@ -21,13 +21,15 @@ export class CommentController {
     },
   );
 
-  hideComment = expressAsyncHandler<CommentControllerId, any, HideCommentDto>(async (req, res) => {
-    await this.commentService.hideComment(req.user?.id!, parseInt(req.params.commentId), req.body);
-    res.status(204).json();
-  });
+  hideComment = expressAsyncHandler<CommentControllerId, unknown, HideCommentDto>(
+    async (req, res) => {
+      await this.commentService.hideComment(req.user.id!, parseInt(req.params.commentId), req.body);
+      res.status(204).json();
+    },
+  );
 
   deleteComment = expressAsyncHandler<CommentControllerId>(async (req, res) => {
-    await this.commentService.deleteComment(req.user?.id!, parseInt(req.params.commentId));
+    await this.commentService.deleteComment(req.user.id!, parseInt(req.params.commentId));
     res.status(204).json();
   });
 }

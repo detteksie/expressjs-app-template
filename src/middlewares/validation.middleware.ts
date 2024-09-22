@@ -5,7 +5,10 @@ export const validationMiddleware = () =>
   expressAsyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(422).json(errors.array());
+      res.status(422).json({
+        status: 'error',
+        errors: errors.array(),
+      });
       return;
     }
     next();

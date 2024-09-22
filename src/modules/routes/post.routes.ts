@@ -10,12 +10,12 @@ export const postRoutes = Router();
 
 postRoutes
   .get('/', paginationMiddleware(), postController.getPostList)
-  .get('/:postId', postValidation.getPost, postController.getPost);
+  .get('/p/:postId', postValidation.getPost, postController.getPost);
 postRoutes
   .use(authMiddleware())
   .post('/', postValidation.createPost, postController.createPost)
-  .post('/:postId/comments', postValidation.addPostComment, postController.addPostComment)
-  .get('/:postId/comments', postValidation.getPostComments, postController.getPostComments)
-  .patch('/:postId', postValidation.updatePost, postController.updatePost)
-  .patch('/:postId/publish', postValidation.publishPost, postController.publishPost)
-  .delete('/:postId', postValidation.deletePost, postController.deletePost);
+  .patch('/p/:postId', postValidation.updatePost, postController.updatePost)
+  .delete('/p/:postId', postValidation.deletePost, postController.deletePost)
+  .patch('/p/:postId/publish', postValidation.publishPost, postController.publishPost)
+  .post('/p/:postId/comments', postValidation.addPostComment, postController.addPostComment)
+  .get('/p/:postId/comments', postValidation.getPostComments, postController.getPostComments);

@@ -2,6 +2,7 @@ import createHttpError from 'http-errors';
 
 import { Sql, sql } from '|/infrastructures/sql';
 import { comparePassword } from '|/utils/bcrypt.util';
+import { createToken } from '|/utils/jwt.util';
 
 import { LoginDto, RegisterDto } from '../dto/auth.dto';
 
@@ -51,10 +52,19 @@ export class AuthService {
       throw this.loginError();
     }
 
-    const passwordMatched = await comparePassword(password, user?.password!);
-    if (!passwordMatched) this.loginError();
+    const passwordMatched = await comparePassword(password, user.password!);
+    if (!passwordMatched) {
+      throw this.loginError();
+    }
 
-    return user;
+    const accessToken = createToken(user, 'access');
+    const refreshToken = createToken(user, 'refresh');
+
+    return {
+      type: 'Bearer',
+      accessToken,
+      refreshToken,
+    };
   }
 }
 

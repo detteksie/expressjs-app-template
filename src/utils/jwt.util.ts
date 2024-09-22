@@ -3,8 +3,16 @@ import { sign, verify } from 'jsonwebtoken';
 import { User } from '|/models/user.model';
 
 export const createToken = (user: User, tokenType: 'access' | 'refresh' = 'access') => {
-  const { password, ...usr } = user.toJSON();
-  const payload = { sub: usr.id };
+  const {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    password,
+    ...usr
+  } = user.toJSON();
+  const payload = {
+    sub: usr.id,
+    username: usr.username,
+    email: usr.email,
+  };
 
   let expiresIn = '30m';
   if (process.env.NODE_ENV === 'production') {
