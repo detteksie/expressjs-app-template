@@ -1,14 +1,13 @@
+/** @type {import('eslint').ESLint.ConfigData} */
 const eslintrc = {
+  root: true,
   parser: '@typescript-eslint/parser',
+  /** @type {import('@typescript-eslint/parser').ParserOptions} */
   parserOptions: {
-    project: 'tsconfig.json',
+    ecmaFeatures: { globalReturn: true },
+    projectService: true,
     tsconfigRootDir: __dirname,
     sourceType: 'module',
-  },
-  root: true,
-  env: {
-    node: true,
-    jest: true,
   },
   ignorePatterns: ['.eslintrc.js'],
   plugins: ['@typescript-eslint', 'prettier', 'import'],
@@ -57,7 +56,15 @@ const eslintrc = {
       },
     ],
 
-    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-empty-object-type': 'warn',
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
+      },
+    ],
   },
   settings: {
     'import/resolver': {
@@ -67,4 +74,5 @@ const eslintrc = {
     },
   },
 };
+
 module.exports = eslintrc;
