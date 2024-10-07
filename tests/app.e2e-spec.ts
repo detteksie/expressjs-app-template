@@ -6,8 +6,12 @@ import { sql } from '|/infrastructures/sql';
 describe('AppController (e2e)', () => {
   let agent: Agent;
 
-  beforeAll(() => {
+  beforeAll(async () => {
     agent = supertest(app);
+  });
+
+  afterAll(async () => {
+    await sql.sequelize.close();
   });
 
   it('should test sql connection', async () => {

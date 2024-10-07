@@ -65,3 +65,4 @@ pnpm seq model:generate --underscored --name product --attributes name:string,pr
 ```
 
 // to set id, use this example -> `select setval('users_id_seq', 1000);`
+

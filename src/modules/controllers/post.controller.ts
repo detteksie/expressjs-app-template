@@ -20,7 +20,6 @@ export class PostController {
 
   getPostList = expressAsyncHandler<unknown, unknown, unknown, PaginationQuery>(
     async (req, res) => {
-      req.query;
       const result = await this.postService.getPostList({
         limit: req.query.limit!,
         page: req.query.page!,

@@ -1,3 +1,4 @@
+import './global';
 import path from 'path';
 
 import compression from 'compression';

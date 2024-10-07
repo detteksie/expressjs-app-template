@@ -6,6 +6,7 @@
 import { createServer } from 'http';
 
 import app from '|/app';
+import { mongodb } from '|/infrastructures/mongodb';
 import { sql } from '|/infrastructures/sql';
 
 import { debug } from './debug';
@@ -31,7 +32,7 @@ server.on('SIGTERM', () => {
   debug('SIGTERM signal received: closing HTTP server');
   server.close(async () => {
     debug('HTTP server closed');
-    await sql.sequelize.close();
+    await Promise.all([sql.sequelize.close(), mongodb.mongoose.disconnect()]);
   });
 });
 
@@ -87,5 +88,5 @@ async function onListening() {
   const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr?.port;
   debug('Listening on ' + bind);
 
-  await Promise.all([sql.authenticate()]);
+  await Promise.all([sql.authenticate(), mongodb.connect()]);
 }

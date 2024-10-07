@@ -1,6 +1,7 @@
 import supertest, { Agent } from 'supertest';
 
 import app from '|/app';
+import { sql } from '|/infrastructures/sql';
 import { User } from '|/models/user.model';
 import { createToken } from '|/utils/jwt.util';
 
@@ -8,7 +9,7 @@ describe('CommentController (e2e)', () => {
   let agent: Agent;
   let accessToken: string;
 
-  beforeAll(() => {
+  beforeAll(async () => {
     agent = supertest(app);
 
     const user = new User({
@@ -19,6 +20,10 @@ describe('CommentController (e2e)', () => {
       name: '',
     });
     accessToken = createToken(user, 'access');
+  });
+
+  afterAll(async () => {
+    await sql.sequelize.close();
   });
 
   describe('/v1/comments/c/:commentId (PATCH)', () => {

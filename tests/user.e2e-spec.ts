@@ -1,6 +1,7 @@
 import supertest, { Agent } from 'supertest';
 
 import app from '|/app';
+import { sql } from '|/infrastructures/sql';
 import { User } from '|/models/user.model';
 import { createToken } from '|/utils/jwt.util';
 
@@ -31,7 +32,11 @@ describe('UserController (e2e)', () => {
     accessTokenNotFound = createToken(userNotFound, 'access');
   });
 
-  describe('/v1/users', () => {
+  afterAll(async () => {
+    await sql.sequelize.close();
+  });
+
+  describe('/v1/users (GET)', () => {
     test('should get post list pagination', async () => {
       const resp = await agent.get('/v1/users');
 
