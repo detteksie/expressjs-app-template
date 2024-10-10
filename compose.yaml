@@ -1,4 +1,4 @@
-name: express-app-template
+name: expressjs-app-template
 
 services:
   postgres:
@@ -33,7 +33,7 @@ services:
       - net
 
   server:
-    image: ssamsara98/express-app-template:deploy
+    image: detteksie/expressjs-app-template:deploy
     build:
       context: ./
       dockerfile: ./Dockerfile

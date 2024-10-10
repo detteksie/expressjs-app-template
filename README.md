@@ -1,6 +1,6 @@
-# Express App - Template
+# ExpressJS App - Template
 
-[Template for Express Application with TypeScript](https://github.com/ssamsara98/express-app-template.git)
+[Template for ExpressJS Application with TypeScript](https://github.com/detteksie/expressjs-app-template.git)
 
 #### prerequisite
 

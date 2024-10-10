@@ -2,7 +2,7 @@
 const config = {
   apps: [
     {
-      name: 'express-app-template',
+      name: 'expressjs-app-template',
       script: '.',
       max_memory_restart: '1G',
       interpreter: './node',

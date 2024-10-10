@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for express-app-template on 2024-08-12T12:08:24+07:00
+# fly.toml app configuration file generated for expressjs-app-template on 2024-08-12T12:08:24+07:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'express-app-template'
+app = 'expressjs-app-template'
 primary_region = 'syd'
 
 [build]

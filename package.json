@@ -1,5 +1,5 @@
 {
-  "name": "express-app-template",
+  "name": "expressjs-app-template",
   "version": "1.0.0",
   "description": "Template for Express Application with TypeScript",
   "author": "S Abd Malik",
@@ -91,9 +91,9 @@
     "jwt",
     "blog"
   ],
-  "repository": "https://github.com/ssamsara98/express-app-template.git",
-  "bugs": "https://github.com/ssamsara98/express-app-template/issues",
-  "homepage": "https://github.com/ssamsara98/express-app-template#readme",
+  "repository": "https://github.com/detteksie/expressjs-app-template.git",
+  "bugs": "https://github.com/detteksie/expressjs-app-template/issues",
+  "homepage": "https://github.com/detteksie/expressjs-app-template#readme",
   "lint-staged": {
     "*.{md,html,css,json}": "prettier -w",
     "*.{js,ts}": "eslint --cache --fix"
