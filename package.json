@@ -97,5 +97,11 @@
   "lint-staged": {
     "*.{md,html,css,json}": "prettier -w",
     "*.{js,ts}": "eslint --cache --fix"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "bcrypt",
+      "es5-ext"
+    ]
   }
 }

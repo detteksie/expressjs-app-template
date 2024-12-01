@@ -9,7 +9,7 @@ const eslintrc = {
     tsconfigRootDir: __dirname,
     sourceType: 'module',
   },
-  ignorePatterns: ['.eslintrc.js'],
+  ignorePatterns: ['.eslintrc.js', 'db/'],
   plugins: ['@typescript-eslint', 'prettier', 'import'],
   extends: [
     'eslint:recommended',
