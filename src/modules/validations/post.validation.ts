@@ -1,6 +1,6 @@
 import { body, param } from 'express-validator';
 
-import { validationMiddleware } from '|/middlewares/validation.middleware';
+import { validationMiddleware } from '@/middlewares/validation.middleware';
 
 export class PostValidation {
   createPost = [

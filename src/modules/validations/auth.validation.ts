@@ -1,6 +1,6 @@
 import { body } from 'express-validator';
 
-import { validationMiddleware } from '|/middlewares/validation.middleware';
+import { validationMiddleware } from '@/middlewares/validation.middleware';
 
 export class AuthValidation {
   register = [

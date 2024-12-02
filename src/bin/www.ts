@@ -5,9 +5,9 @@
  */
 import { createServer } from 'http';
 
-import app from '|/app';
-import { mongodb } from '|/infrastructures/mongodb';
-import { sql } from '|/infrastructures/sql';
+import app from '@/app';
+import { mongodb } from '@/infrastructures/mongodb';
+import { sql } from '@/infrastructures/sql';
 
 import { debug } from './debug';
 
@@ -30,9 +30,11 @@ server.on('error', onError);
 server.on('listening', onListening);
 server.on('SIGTERM', () => {
   debug('SIGTERM signal received: closing HTTP server');
-  server.close(async () => {
+  server.close(() => {
     debug('HTTP server closed');
-    await Promise.all([sql.sequelize.close(), mongodb.mongoose.disconnect()]);
+    void (async () => {
+      await Promise.all([sql.sequelize.close(), mongodb.mongoose.disconnect()]);
+    })();
   });
 });
 
@@ -58,7 +60,11 @@ function normalizePort(val: string) {
 /**
  * Event listener for HTTP server "error" event.
  */
-async function onError(error: { syscall: string; code: string }) {
+class OnError extends Error {
+  declare readonly syscall: string;
+  declare readonly code: string;
+}
+function onError(error: OnError) {
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -83,10 +89,12 @@ async function onError(error: { syscall: string; code: string }) {
 /**
  * Event listener for HTTP server "listening" event.
  */
-async function onListening() {
+function onListening() {
   const addr = server.address();
   const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr?.port;
   debug('Listening on ' + bind);
 
-  await Promise.all([sql.authenticate(), mongodb.connect()]);
+  void (async () => {
+    await Promise.all([sql.authenticate(), mongodb.connect()]);
+  })();
 }

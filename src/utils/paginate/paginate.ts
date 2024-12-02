@@ -14,7 +14,7 @@ export function resolveOptions<CustomMetaType extends ObjectLiteral>(
 ): [number, number, string, boolean] {
   const page = resolveNumericOption(options, 'page', DEFAULT_PAGE);
   const limit = resolveNumericOption(options, 'limit', DEFAULT_LIMIT);
-  const route = options.route!;
+  const route = options.route;
   // const paginationType = options.paginationType || PaginationTypeEnum.LIMIT_AND_OFFSET;
   const countQueries = typeof options.countQueries !== 'undefined' ? options.countQueries : true;
   // const cacheQueries = options.cacheQueries || false;

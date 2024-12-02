@@ -5,3 +5,5 @@ export async function safewait<E extends Error = Error, T = unknown>(
     .then((response): [T, null] => [response, null])
     .catch((error): [null, E] => [null, error]);
 }
+
+export type Safewait = typeof safewait;

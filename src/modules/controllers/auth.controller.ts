@@ -1,6 +1,6 @@
 import expressAsyncHandler from 'express-async-handler';
 
-import { successJson } from '|/utils/response.util';
+import { successJson } from '@/utils/response.util';
 
 import { LoginDto, RegisterDto } from '../dto/auth.dto';
 import { AuthService, authService } from '../services/auth.service';

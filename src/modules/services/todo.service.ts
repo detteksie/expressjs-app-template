@@ -1,9 +1,9 @@
 import createHttpError from 'http-errors';
 
-import { MongoDB, mongodb } from '|/infrastructures/mongodb';
-import { User } from '|/models/user.model';
-import { mongoosePaginate } from '|/utils/mongoose-paginate';
-import { IPaginationOptions } from '|/utils/paginate';
+import { MongoDB, mongodb } from '@/infrastructures/mongodb';
+import { User } from '@/models/user.model';
+import { mongoosePaginate } from '@/utils/mongoose-paginate';
+import { IPaginationOptions } from '@/utils/paginate';
 
 import { CreateTodoDto, UpdateTodoDto } from '../dto/todo.dto';
 

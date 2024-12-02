@@ -1,6 +1,6 @@
 import { Request } from 'express';
 
-interface SuccessJson<T = any> {
+interface SuccessJson<T = unknown> {
   message: string;
   result: T;
 }

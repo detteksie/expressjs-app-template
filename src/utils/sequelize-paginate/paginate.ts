@@ -18,7 +18,7 @@ export async function sequelizePaginate<
   options: IPaginationOptions<CustomMetaType>,
   searchOptions?: Omit<FindAndCountOptions<Attributes<M>>, 'group'>,
 ) {
-  const [page, limit, route] = resolveOptions(options!);
+  const [page, limit, route] = resolveOptions(options);
 
   const { rows: items, count: total } = await model.findAndCountAll({
     limit,

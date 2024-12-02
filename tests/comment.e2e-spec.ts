@@ -1,15 +1,15 @@
 import supertest, { Agent } from 'supertest';
 
-import app from '|/app';
-import { sql } from '|/infrastructures/sql';
-import { User } from '|/models/user.model';
-import { createToken } from '|/utils/jwt.util';
+import app from '@/app';
+import { sql } from '@/infrastructures/sql';
+import { User } from '@/models/user.model';
+import { createToken } from '@/utils/jwt.util';
 
 describe('CommentController (e2e)', () => {
   let agent: Agent;
   let accessToken: string;
 
-  beforeAll(async () => {
+  beforeAll(() => {
     agent = supertest(app);
 
     const user = new User({

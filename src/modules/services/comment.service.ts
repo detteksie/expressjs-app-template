@@ -1,4 +1,4 @@
-import { Sql, sql } from '|/infrastructures/sql';
+import { Sql, sql } from '@/infrastructures/sql';
 
 import { HideCommentDto, UpdateCommentDto } from '../dto/comment.dto';
 

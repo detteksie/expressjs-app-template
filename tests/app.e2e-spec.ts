@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import supertest, { Agent } from 'supertest';
 
-import app from '|/app';
-import { sql } from '|/infrastructures/sql';
+import app from '@/app';
+import { sql } from '@/infrastructures/sql';
 
 describe('AppController (e2e)', () => {
   let agent: Agent;
 
-  beforeAll(async () => {
+  beforeAll(() => {
     agent = supertest(app);
   });
 
@@ -14,7 +15,7 @@ describe('AppController (e2e)', () => {
     await sql.sequelize.close();
   });
 
-  it('should test sql connection', async () => {
+  it('should test sql connection', () => {
     expect(() => sql.authenticate()).not.toThrow();
   });
 

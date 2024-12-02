@@ -1,5 +1,5 @@
-import { mongodb } from '|/infrastructures/mongodb';
-import mongodbTodoJson from '|db/mongodb/todo.json';
+import { mongodb } from '@/infrastructures/mongodb';
+import mongodbTodoJson from '@db/mongodb/todo.json';
 
 export const mongodbSetup = async () => {
   await mongodb.connect();

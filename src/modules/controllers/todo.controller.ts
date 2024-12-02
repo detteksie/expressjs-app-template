@@ -1,7 +1,7 @@
 import expressAsyncHandler from 'express-async-handler';
 
-import { PaginationQuery } from '|/utils/pagination-query.util';
-import { successJson } from '|/utils/response.util';
+import { PaginationQuery } from '@/utils/pagination-query.util';
+import { successJson } from '@/utils/response.util';
 
 import { CreateTodoDto, UpdateTodoDto } from '../dto/todo.dto';
 import { TodoService, todoService } from '../services/todo.service';
@@ -21,8 +21,8 @@ export class TodoController {
   getTodoList = expressAsyncHandler<unknown, unknown, unknown, PaginationQuery>(
     async (req, res) => {
       const result = await this.todoService.getTodoList(req.user, {
-        limit: req.query.limit!,
-        page: req.query.page!,
+        limit: req.query.limit,
+        page: req.query.page,
         route: req.originalUrl,
       });
       res.json(successJson(result));

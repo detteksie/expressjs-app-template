@@ -1,8 +1,8 @@
 import createHttpError from 'http-errors';
 
-import { Sql, sql } from '|/infrastructures/sql';
-import { comparePassword } from '|/utils/bcrypt.util';
-import { createToken } from '|/utils/jwt.util';
+import { Sql, sql } from '@/infrastructures/sql';
+import { comparePassword } from '@/utils/bcrypt.util';
+import { createToken } from '@/utils/jwt.util';
 
 import { LoginDto, RegisterDto } from '../dto/auth.dto';
 
@@ -49,12 +49,12 @@ export class AuthService {
 
     const user = await this.findEmailOrUsername(userSession, userSession, true);
     if (!user) {
-      throw this.loginError();
+      this.loginError();
     }
 
-    const passwordMatched = await comparePassword(password, user.password!);
+    const passwordMatched = await comparePassword(password, user.password);
     if (!passwordMatched) {
-      throw this.loginError();
+      this.loginError();
     }
 
     const accessToken = createToken(user, 'access');

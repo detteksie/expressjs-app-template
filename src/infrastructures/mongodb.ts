@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
-import { debug } from '|/bin/debug';
-import { ITodo, TodoModel } from '|/schemas/todo.schema';
+import { debug } from '@/bin/debug';
+import { ITodo, TodoModel } from '@/schemas/todo.schema';
 
 export class Schemas {
   readonly Todo!: mongoose.Model<ITodo>;
@@ -25,12 +25,12 @@ export class MongoDB extends Schemas {
     if (process.env.NODE_ENV === 'development') {
       this.mongoose.set('debug', true);
     }
-    const [, err] = await safewait(this.mongoose.connect(process.env.MONGODB_URI!));
+    const [, err] = await safewait(this.mongoose.connect(process.env.MONGODB_URI));
     if (err && process.env.NODE_ENV !== 'test') {
       console.error('Unable to connect to MongoDB:', err.message);
       const sto = setTimeout(() => {
         console.log('reconnecting');
-        this.connect();
+        void this.connect();
         clearTimeout(sto);
       }, 10000);
       return;
@@ -43,7 +43,7 @@ export class MongoDB extends Schemas {
     if (err && process.env.NODE_ENV !== 'test') {
       console.error('Unable to disconnect MongoDB:', err.message);
       const sto = setTimeout(() => {
-        this.disconnect();
+        void this.disconnect();
         clearTimeout(sto);
       }, 10000);
       return;

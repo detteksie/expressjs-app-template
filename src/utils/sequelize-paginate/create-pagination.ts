@@ -27,14 +27,14 @@ export function createPaginationObject<T, CustomMetaType extends ObjectLiteral =
 
   const hasFirstPage = route;
   const hasPreviousPage = route && currentPage > 1;
-  const hasNextPage = route && totalItems !== undefined && currentPage < totalPages!;
-  const hasLastPage = route && totalItems !== undefined && totalPages! > 0;
+  const hasNextPage = route && totalItems !== undefined && currentPage < totalPages;
+  const hasLastPage = route && totalItems !== undefined && totalPages > 0;
 
   const symbol = route && new RegExp(/\?/).test(route) ? '&' : '?';
 
-  const limitLabel = routingLabels && routingLabels.limitLabel ? routingLabels.limitLabel : 'limit';
+  const limitLabel = routingLabels?.limitLabel ? routingLabels.limitLabel : 'limit';
 
-  const pageLabel = routingLabels && routingLabels.pageLabel ? routingLabels.pageLabel : 'page';
+  const pageLabel = routingLabels?.pageLabel ? routingLabels.pageLabel : 'page';
 
   const routes =
     totalItems !== undefined

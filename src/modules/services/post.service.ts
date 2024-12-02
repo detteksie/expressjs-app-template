@@ -1,8 +1,8 @@
 import createHttpError from 'http-errors';
 
-import { Sql, sql } from '|/infrastructures/sql';
-import { IPaginationOptions } from '|/utils/paginate';
-import { sequelizePaginate } from '|/utils/sequelize-paginate';
+import { Sql, sql } from '@/infrastructures/sql';
+import { IPaginationOptions } from '@/utils/paginate';
+import { sequelizePaginate } from '@/utils/sequelize-paginate';
 
 import { AddPostCommentDto, CreatePostDto, PublishPostDto, UpdatePostDto } from '../dto/post.dto';
 

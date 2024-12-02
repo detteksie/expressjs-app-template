@@ -12,7 +12,7 @@ import {
   Sequelize,
 } from 'sequelize';
 
-import { Models } from '|/infrastructures/sql';
+import { Models } from '@/infrastructures/sql';
 
 import { Post } from './post.model';
 import { User } from './user.model';

@@ -13,7 +13,7 @@ export class CommentController {
   updateComment = expressAsyncHandler<CommentControllerId, unknown, UpdateCommentDto>(
     async (req, res) => {
       await this.commentService.updateComment(
-        req.user.id!,
+        req.user.id,
         parseInt(req.params.commentId),
         req.body,
       );
@@ -23,13 +23,13 @@ export class CommentController {
 
   hideComment = expressAsyncHandler<CommentControllerId, unknown, HideCommentDto>(
     async (req, res) => {
-      await this.commentService.hideComment(req.user.id!, parseInt(req.params.commentId), req.body);
+      await this.commentService.hideComment(req.user.id, parseInt(req.params.commentId), req.body);
       res.status(204).json();
     },
   );
 
   deleteComment = expressAsyncHandler<CommentControllerId>(async (req, res) => {
-    await this.commentService.deleteComment(req.user.id!, parseInt(req.params.commentId));
+    await this.commentService.deleteComment(req.user.id, parseInt(req.params.commentId));
     res.status(204).json();
   });
 }

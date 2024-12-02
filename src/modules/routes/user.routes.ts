@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import { authMiddleware } from '|/middlewares/auth.middleware';
-import { paginationMiddleware } from '|/middlewares/pagination.middleware';
+import { authMiddleware } from '@/middlewares/auth.middleware';
+import { paginationMiddleware } from '@/middlewares/pagination.middleware';
 
 import { userController } from '../controllers/user.controller';
 import { userValidation } from '../validations/user.validation';

@@ -9,7 +9,7 @@ import { userRoutes } from './modules/routes/user.routes';
 export const router = Router();
 
 /* GET home page. */
-router.get('/', (async (req, res) => {
+router.get('/', ((_req, res) => {
   res.render('index', { title: 'Express' });
 }) satisfies RequestHandler);
 

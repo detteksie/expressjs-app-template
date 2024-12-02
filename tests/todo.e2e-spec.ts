@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import supertest from 'supertest';
 
-import app from '|/app';
-import { mongodb } from '|/infrastructures/mongodb';
-import { User } from '|/models/user.model';
-import { createToken } from '|/utils/jwt.util';
+import app from '@/app';
+import { mongodb } from '@/infrastructures/mongodb';
+import { User } from '@/models/user.model';
+import { createToken } from '@/utils/jwt.util';
 
 describe('UserController (e2e)', () => {
   let agent: supertest.Agent;

@@ -18,6 +18,6 @@ const defaultQuery: DefaultQuery = {
 };
 
 export function checkPaginationDefault(query: PaginationQuery, value: DefaultQuery = defaultQuery) {
-  if (!query.page || query.page < value.minPage!) query.page! = value.page!;
-  if (!query.limit || query.limit < value.minLimit!) query.limit! = value.limit!;
+  if (!query.page || query.page < value.minPage) query.page = value.page!;
+  if (!query.limit || query.limit < value.minLimit) query.limit = value.limit!;
 }

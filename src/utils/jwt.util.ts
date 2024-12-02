@@ -1,13 +1,9 @@
 import { sign, verify } from 'jsonwebtoken';
 
-import { User } from '|/models/user.model';
+import { User } from '@/models/user.model';
 
 export const createToken = (user: User, tokenType: 'access' | 'refresh' = 'access') => {
-  const {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    password,
-    ...usr
-  } = user.toJSON();
+  const { password, ...usr } = user.toJSON();
   const payload = {
     sub: usr.id,
     username: usr.username,
@@ -25,7 +21,7 @@ export const createToken = (user: User, tokenType: 'access' | 'refresh' = 'acces
 
   const token = sign(
     payload,
-    tokenType === 'refresh' ? process.env.JWT_REFRESH_SECRET! : process.env.JWT_ACCESS_SECRET!,
+    tokenType === 'refresh' ? process.env.JWT_REFRESH_SECRET : process.env.JWT_ACCESS_SECRET,
     { expiresIn },
   );
   return token;
@@ -34,7 +30,7 @@ export const createToken = (user: User, tokenType: 'access' | 'refresh' = 'acces
 export const verifyToken = (token: string, tokenType: 'access' | 'refresh' = 'access') => {
   const payload = verify(
     token,
-    tokenType === 'refresh' ? process.env.JWT_REFRESH_SECRET! : process.env.JWT_ACCESS_SECRET!,
+    tokenType === 'refresh' ? process.env.JWT_REFRESH_SECRET : process.env.JWT_ACCESS_SECRET,
   );
   return payload;
 };

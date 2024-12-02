@@ -31,12 +31,12 @@ app.use(e.static(path.join(__dirname, '..', 'public')));
 app.use('/', router);
 
 // catch 404 and forward to error handler
-app.use(async (_req, _res, next) => {
+app.use((_req, _res, next) => {
   next(createHttpError(404));
 });
 
 // error handler
-app.use((async (err, req, res, next) => {
+app.use(((err, req, res, next) => {
   // set locals, only providing error in development
   // const error = [
   //   {
@@ -45,13 +45,13 @@ app.use((async (err, req, res, next) => {
   //     ...(req.app.get('env') === 'development' ? { stack: err.stack, err } : {}),
   //   },
   // ];
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.message = (err as createHttpError.HttpError).message;
+  res.locals.error = req.app.get('env') === 'development' ? (err as createHttpError.HttpError) : {};
   // res.locals.err = error;
   res.locals.err = errorJson(req, err);
 
   // render the error page
-  res.status(err.status || 500);
+  res.status((err as createHttpError.HttpError).status || 500);
   next();
 }) satisfies ErrorRequestHandler);
 app.use((_, res) => {

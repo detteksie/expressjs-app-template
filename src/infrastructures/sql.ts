@@ -1,17 +1,17 @@
 import sequelize from 'sequelize';
 
-import { debug } from '|/bin/debug';
-import { Comment, commentModel } from '|/models/comment.model';
-import { Post, postModel } from '|/models/post.model';
-import { User, userModel } from '|/models/user.model';
-import databaseConfig, { DatabaseConfig } from '|db/database.config';
+import { debug } from '@/bin/debug';
+import { Comment, commentModel } from '@/models/comment.model';
+import { Post, postModel } from '@/models/post.model';
+import { User, userModel } from '@/models/user.model';
+import databaseConfig, { DatabaseConfig } from '@db/database.config';
 
-const env = process.env.NODE_ENV! || 'development';
+const env = process.env.NODE_ENV || 'development';
 const config = databaseConfig[env as keyof DatabaseConfig];
 
 export const sqlz: sequelize.Sequelize = config.url
   ? new sequelize.Sequelize(config.url satisfies string, config)
-  : new sequelize.Sequelize(config.database!, config.username!, config.password, config);
+  : new sequelize.Sequelize(config.database, config.username, config.password, config);
 
 export class Models {
   readonly User!: typeof User;
@@ -58,7 +58,7 @@ export class Sql extends Models {
     if (err && process.env.NODE_ENV !== 'test') {
       console.error('Unable to connect to SQL database:', err);
       const sto = setTimeout(() => {
-        this.authenticate();
+        void this.authenticate();
         clearTimeout(sto);
       }, 10000);
       return;
